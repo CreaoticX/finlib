@@ -25,7 +25,7 @@ class Calculator {
 	// "taxes_and_insurance" : Taxes and insurance
 	// "min_total" : Total monthly payment (conservative)
 	// "max_total" : Total monthly payment (aggressive)
-	function home_affordability($input) {
+	static function home_affordability($input) {
 		// assume
 		$min_pti = 0.28;
 		$max_pti = 0.33;
@@ -88,7 +88,7 @@ class Calculator {
 	// "monthly_tax" - Monthly tax
 	// "monthly_insurance" - Monthly insurance
 	// "total" - Total monthly payment
-	function mortgage_payment($input) {
+	static function mortgage_payment($input) {
 		$mi = $input['interest'] / 1200;
 		$base = 1;
 		$mbase = 1 + $mi;
@@ -114,19 +114,19 @@ class Calculator {
 	// "rate" - grow rate
 	// "pyears" - years to pay out
 	// "prate" - in retirement grow rate
-	function simple_retirement($input) {
+	static function simple_retirement($input) {
 		// calculate the basic investment
-		$future_value = $this -> future_value($input['principal'], $input['rate']/100, $input['growyears']);
-		$g_series = $this->g_series(1+$input['rate']/100, 1, $input['growyears']);		
+		$future_value = self::future_value($input['principal'], $input['rate']/100, $input['growyears']);
+		$g_series = self::g_series(1+$input['rate']/100, 1, $input['growyears']);		
 		$basic = $future_value + $input['addition'] * $g_series;
 				
 		// annual retirement income
-		$annuity_payout = $this->annuity_payout($basic, $input['prate']/100, $input['pyears']);	
+		$annuity_payout = self::annuity_payout($basic, $input['prate']/100, $input['pyears']);	
 		return array("annual_retirement_income"=>number_format($annuity_payout, 2));	 
 	}
 	
 	// helpers below
-	function nval($value,$d=null,$min=null,$max=null) {
+	static function nval($value,$d=null,$min=null,$max=null) {
 		if(!is_numeric($value)) $value = 0;
 
 		if ($d) {
@@ -139,24 +139,24 @@ class Calculator {
 	}
 	
 	// future value of money
-	function future_value($principal, $rate, $periods) {
+	static function future_value($principal, $rate, $periods) {
 		//echo $principal."-".$rate."-".$periods."<br>";
 		$future_value = $principal * pow(1 + $rate, $periods);
 		return $future_value;
 	}
 	
 	// geom series
-	function g_series($rrate, $m, $periods) {
+	static function g_series($rrate, $m, $periods) {
 		$amount = 0;
 		if ($rrate == 1) $amount = $periods + 1;
 		else $amount = (pow($rrate, $periods+1) - 1) / ($rrate - 1); 
-		if ($m >= 1) $amount -= $this->g_series($rrate,0,$m-1);
+		if ($m >= 1) $amount -= self::g_series($rrate,0,$m-1);
 		return $amount;
 	}
 	
 	// calculate annuity payout
-	function annuity_payout($principal, $pay_rate, $pay_years) {		
-		$payout = $this->future_value($principal, $pay_rate, $pay_years -1) / $this->g_series(1+$pay_rate, 0, $pay_years - 1);
+	static function annuity_payout($principal, $pay_rate, $pay_years) {		
+		$payout = self::future_value($principal, $pay_rate, $pay_years -1) / self::g_series(1+$pay_rate, 0, $pay_years - 1);
 		return $payout;
 	}
 }
