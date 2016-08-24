@@ -116,7 +116,8 @@ class Calculator {
 	// "prate" - in retirement grow rate
 	static function simple_retirement($input) {
 		// calculate the basic investment
-		$future_value = self::future_value($input['principal'], $input['rate']/100, $input['growyears']);
+                $fv_array = array('present_value'=>$input['principal'],'interest'=>$input['rate'],'periods'=>$input['growyears']);
+		$future_value = self::future_value($fv_array);
 		$g_series = self::g_series(1+$input['rate']/100, 1, $input['growyears']);		
 		$basic = $future_value + $input['addition'] * $g_series;
 				
@@ -138,13 +139,6 @@ class Calculator {
 		return $value;
 	}
 	
-	// future value of money
-	static function future_value($principal, $rate, $periods) {
-		//echo $principal."-".$rate."-".$periods."<br>";
-		$future_value = $principal * pow(1 + $rate, $periods);
-		return $future_value;
-	}
-	
 	// geom series
 	static function g_series($rrate, $m, $periods) {
 		$amount = 0;
@@ -155,8 +149,76 @@ class Calculator {
 	}
 	
 	// calculate annuity payout
-	static function annuity_payout($principal, $pay_rate, $pay_years) {		
-		$payout = self::future_value($principal, $pay_rate, $pay_years -1) / self::g_series(1+$pay_rate, 0, $pay_years - 1);
+	static function annuity_payout($principal, $pay_rate, $pay_years) {
+                $fv_array = array('present_value'=>$principal,'interest'=>$pay_rate*100,'periods'=>$pay_years -1);
+		$payout = self::future_value($fv_array) / self::g_series(1+$pay_rate, 0, $pay_years - 1);
 		return $payout;
+	}
+	// calculate effective interest rate
+	static function effective_interest($input) {
+		$x = 1 + $input['nominal_interest'] / (100 * $input['compounding_frequency']);		
+		$y = $input['compounding_frequency'] / $input['payments_per_year'];
+		
+		$interest = ( pow($x, $y) - 1 ) * 100;			
+		return $interest;				
+	}
+	
+	// future value of single sum
+	static function future_value($input) {
+		return ( $input['present_value'] * pow(1 + $input['interest']/100, $input['periods']) );
+	}
+	
+	// future value with compounding
+	static function future_value_compounded($input) {
+		return ( $input['present_value'] * pow(1 + ($input['interest'] / 100) / $input['compounding_frequency'], $input['periods'] - $input['compounding_frequency']) );
+	}
+	
+	// future value of annuity
+	static function future_value_annuity($input) {
+		$future_value = $input['periodic_payment'] * ( (pow(1 + $input['interest'] / 100, $input['periods']) -1) / $input['interest'] );
+		return $future_value;
+	}
+	
+	// future value of annuity due
+	static function future_value_annuity_due($input) {
+		$future_value = $input['periodic_payment'] * ( (pow(1 + $input['interest'] / 100, $input['periods']) -1) / $input['interest'] ) * ($input['interest'] + 1);
+		return $future_value;
+	}
+
+	
+	// monthly payment
+	static function monthly_payment($input) {
+		$x = $input['interest'] * pow(1 + $input['interest'] / 100, $input['periods']);
+		$y = pow(1 + $input['interest'], $input['periods']) - 1;
+		
+		return $input['amount'] * ($x / $y);
+	}
+	
+	// present value of investment made in the future
+	static function present_value($input) {
+		 $present_value = $input['future_value'] / pow( (1 + $input['interest'] / 100), $input['periods']);
+		 return $present_value;	
+	}
+	
+	// present value with compounding
+	static function present_value_compounded($input) {
+		 $present_value = $input['future_value'] / ( (1 + $input['interest'] / 100 /$frequency) * ($input['periods'] - $frequency) ); 
+		 return $present_value;	
+	}
+	
+	// perpetuity
+	static function perpetuity($input) {
+		 return $input['payment'] / $input['interest'] / 100;
+	}	
+	
+	// expected rate of return
+	// accepts array of arrays ((probability, ROI), (probability, ROI)...)
+	static function ERR($vals) {
+		 $err = 0;
+		 foreach($vals as $val) {
+		 		$err += $val[0] * $val[1];	
+		 }	
+		 
+		 return $err;
 	}
 }
