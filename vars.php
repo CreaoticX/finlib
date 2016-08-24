@@ -4,16 +4,25 @@ $calculators = array(
 	'home_affordability' => "Home Affordability Calculator",
 	'mortgage_payment' => "Monthly Mortgage Payment Calculator",
 	'simple_retirement' => "Simple Retirement Calculator",
+	'effective_interest' => 'Effective Interest Equation',
+	'future_value' => 'Future Value of Single Sum',
+	'future_value_compounded' => 'Future Value With Compounding',
+	'future_value_annuity' => 'Future Value of Annuity',
+	'future_value_annuity_due' => 'Future Value of Annuity Due',
+	'monthly_payment' => 'Monthly Payment',
+	'present_value' => 'Present Value of Future Investment',
+	'present_value_compounded' => 'Present Value with Compounding',
+	'perpetuity' => 'Perpetuity', 
 );
 
 $calculator_fields = array(
 	'home_affordability' => array(
-			'tax'=>array("label"=>"Annual Property Taxes", "type"=>"text"), 
-			'insurance'=>array("label"=>"Annual Insurance", "type"=>"text"),
-			'annual_income'=>array("label"=>"Gross annual income", "type"=>"text"),
-			'monthly_debt'=>array("label"=>"Monthly Debt", "type"=>"text"),
-			'interest'=>array("label"=>"Mortgage Loan Rate", "type"=>"text"),
-			'downpayment'=>array("label"=>"Downpayment Amount", "type"=>"text"),
+                'tax'=>array("label"=>"Annual Property Taxes", "type"=>"text"), 
+                'insurance'=>array("label"=>"Annual Insurance", "type"=>"text"),
+                'annual_income'=>array("label"=>"Gross annual income", "type"=>"text"),
+                'monthly_debt'=>array("label"=>"Monthly Debt", "type"=>"text"),
+                'interest'=>array("label"=>"Mortgage Loan Rate", "type"=>"text"),
+                'downpayment'=>array("label"=>"Downpayment Amount", "type"=>"text"),
 		),
 	'mortgage_payment' => array(
 		'years'=>array("label"=>"Loan term in years", "type"=>"text"),
@@ -30,21 +39,6 @@ $calculator_fields = array(
 		'pyears'=>array("label"=>"Years to pay out", "type"=>"text"),
 		'prate'=>array("label"=>"Retirement grow rate", "type"=>"text"),
 	),
-);
-
-$equations = array(
-	'effective_interest' => 'Effective Interest Equation',
-	'future_value' => 'Future Value of Single Sum',
-	'future_value_compounded' => 'Future Value With Compounding',
-	'future_value_annuity' => 'Future Value of Annuity',
-	'future_value_annuity_due' => 'Future Value of Annuity Due',
-	'monthly_payment' => 'Monthly Payment',
-	'present_value' => 'Present Value of Future Investment',
-	'present_value_compounded' => 'Present Value with Compounding',
-	'perpetuity' => 'Perpetuity', 
-);
-
-$equation_fields = array(
 	'effective_interest' => array(
 		'nominal_interest'=> array('label' => 'Nominal Interest', 'type' => 'Text'),
 		'compounding_frequency'=> array('label' => 'Compounding Frequency', 'type' => 'Text'),
