@@ -74,6 +74,8 @@ $calculator_fields = array(
 		'amount'=> array('label' => 'Amount', 'type' => 'Text'),
 		'interest'=> array('label' => 'Interest', 'type' => 'Text'),
 		'periods'=> array('label' => 'Number of Periods', 'type' => 'Text'),		
+		'year_or_month'=> array('label' => 'Periods Are Monthly', 'type' => 'Boolean'),		
+		'pay_at_beginning'=> array('label' => 'Pay at Beginning of Month', 'type' => 'Boolean'),		
 	),
 	
 	'present_value' => array(

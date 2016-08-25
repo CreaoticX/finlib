@@ -198,11 +198,11 @@ class Calculator {
     // monthly payment
     static function monthly_payment($input) {
         $mi = $input['periods']*12;
-        if($input['yearOrMonth'] === 1 || $input['yearOrMonth'] === TRUE){
+        if($input['year_or_month'] === 1 || $input['year_or_month'] === TRUE){
             $mi = $input['periods'];
         }
         $pab = $mi;
-        if($input['payAtBeginning'] === 1 || $input['payAtBeginning'] === TRUE){
+        if($input['pay_at_beginning'] === 1 || $input['pay_at_beginning'] === TRUE){
             $pab = $mi-1;
         }
         $rpp = $input['interest']/ 12 / 100;
