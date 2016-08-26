@@ -1,6 +1,5 @@
 <?php
 // testing machine
-require("equator.php");
 require("render.php");
 require("calculator.php");
 require("vars.php");
