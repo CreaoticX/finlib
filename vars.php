@@ -72,8 +72,8 @@ if (!class_exists('CalcVars')) {
                 'amount' => array('label' => 'Amount', 'type' => 'number'),
                 'interest' => array('label' => 'Interest', 'type' => 'number'),
                 'periods' => array('label' => 'Number of Periods', 'type' => 'number'),
-                'year_or_month' => array('label' => 'Periods Are Monthly', 'type' => 'Boolean'),
-                'pay_at_beginning' => array('label' => 'Pay at Beginning of Month', 'type' => 'Boolean'),
+                'year_or_month' => array('label' => 'Periods Are Monthly', 'type' => 'checkbox'),
+                'pay_at_beginning' => array('label' => 'Pay at Beginning of Month', 'type' => 'checkbox'),
             ),
             'present_value' => array(
                 'future_value' => array('label' => 'Future Value', 'type' => 'number'),
