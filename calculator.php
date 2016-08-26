@@ -198,18 +198,18 @@ class Calculator {
     // monthly payment
     static function monthly_payment($input) {
         $mi = $input['periods']*12;
-        if($input['year_or_month'] === 1 || $input['year_or_month'] === TRUE){
+        if($input['year_or_month'] == 1 || $input['year_or_month'] === TRUE){
             $mi = $input['periods'];
         }
         $pab = $mi;
-        if($input['pay_at_beginning'] === 1 || $input['pay_at_beginning'] === TRUE){
+        if($input['pay_at_beginning'] == 1 || $input['pay_at_beginning'] === TRUE){
             $pab = $mi-1;
         }
         $rpp = $input['interest']/ 12 / 100;
         $x = $rpp * pow(1 + $rpp, $pab);
         $y = pow(1 + $rpp, $mi) - 1;
 
-        return $input['amount'] * ($x / $y);
+        return round($input['amount'] * ($x / $y),2);
     }
 
     // present value of investment made in the future
