@@ -236,6 +236,11 @@ class Calculator {
         return $input['payment'] / $input['interest'] / 100;
     }
 
+    // Leverage Ratio
+    static function leverage_ratio($input) {
+        return round($input['total_liabilities'] + $input['total_debt'] / $input['total_income'],2);
+    }
+
     // expected rate of return
     // accepts array of arrays ((probability, ROI), (probability, ROI)...)
     static function ERR($vals) {

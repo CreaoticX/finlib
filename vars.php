@@ -18,6 +18,7 @@ if (!class_exists('CalcVars')) {
             'present_value' => 'Present Value of Future Investment',
             'present_value_compounded' => 'Present Value with Compounding',
             'perpetuity' => 'Perpetuity',
+            'leverage_ratio' => 'Leverage Ratio',
         );
         static $calculator_fields = array(
             'home_affordability' => array(
@@ -96,6 +97,11 @@ if (!class_exists('CalcVars')) {
             'perpetuity' => array(
                 'payment' => array('label' => 'Payment', 'type' => 'number'),
                 'interest' => array('label' => 'Interest', 'type' => 'number'),
+            ),
+            'leverage_ratio' => array(
+                'total_liabilities' => array('label' => 'Total Liabilities', 'type' => 'number'),
+                'total_debt' => array('label' => 'Total Debt', 'type' => 'number'),
+                'total_income' => array('label' => 'Total Income', 'type' => 'number'),
             ),
         );
 
