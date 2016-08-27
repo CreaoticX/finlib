@@ -173,9 +173,16 @@ class Calculator {
         return $interest;
     }
 
+    // calculate compound interest
+    static function compounding_interest($input) {
+        $x = 1+(($input['interest_rate']/$input['compounding_frequency'])/100);
+        $ci = $input['principal']*pow($x,$input['compounding_frequency']*$input['periods']);
+        return round($ci ,2);
+    }
+
     // future value of single sum
     static function future_value($input) {
-        return ( $input['present_value'] * pow(1 + $input['interest'] / 100, $input['periods']) );
+        return round( $input['present_value'] * pow(1 + $input['interest'] / 100, $input['periods']) ,2);
     }
 
     // future value with compounding
@@ -215,7 +222,7 @@ class Calculator {
     // present value of investment made in the future
     static function present_value($input) {
         $present_value = $input['future_value'] / pow((1 + $input['interest'] / 100), $input['periods']);
-        return $present_value;
+        return round($present_value,2);
     }
 
     // present value with compounding

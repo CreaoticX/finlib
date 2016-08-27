@@ -9,6 +9,7 @@ if (!class_exists('CalcVars')) {
             'mortgage_payment' => "Monthly Mortgage Payment Calculator",
             'simple_retirement' => "Simple Retirement Calculator",
             'effective_interest' => 'Effective Interest Equation',
+            'compound_interest' => 'Compound Interest',
             'future_value' => 'Future Value of Single Sum',
             'future_value_compounded' => 'Future Value With Compounding',
             'future_value_annuity' => 'Future Value of Annuity',
@@ -46,6 +47,12 @@ if (!class_exists('CalcVars')) {
                 'nominal_interest' => array('label' => 'Nominal Interest', 'type' => 'number'),
                 'compounding_frequency' => array('label' => 'Compounding Frequency', 'type' => 'number'),
                 'payments_per_year' => array('label' => 'Payments Per Year', 'type' => 'number'),
+            ),
+            'compound_interest' => array(
+                'principal' => array('label' => 'Principal', 'type' => 'number'),
+                'interest_rate' => array('label' => 'Interest Rate', 'type' => 'number'),
+                'compounding_frequency' => array('label' => 'Number of Compoundings per Period', 'type' => 'number'),
+                'periods' => array('label' => 'Number of Periods', 'type' => 'number'),
             ),
             'future_value' => array(
                 'present_value' => array('label' => 'Present Value', 'type' => 'number'),
