@@ -103,6 +103,10 @@ if (!class_exists('CalcVars')) {
                 'total_debt' => array('label' => 'Total Debt', 'type' => 'number'),
                 'total_income' => array('label' => 'Total Income', 'type' => 'number'),
             ),
+            'inflation_adjusted_return' => array(
+                'investment_returned' => array('label' => 'Investment Returned', 'type' => 'number'),
+                'inflation_rate' => array('label' => 'Inflation Rate', 'type' => 'number'),
+            ),
         );
 
     }

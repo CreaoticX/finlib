@@ -241,6 +241,11 @@ class Calculator {
         return round($input['total_liabilities'] + $input['total_debt'] / $input['total_income'],2);
     }
 
+    // Inflation adjusted return
+    static function inflation_adjusted_return($input) {
+        return round(100 * (((1 + ($input['investment_returned']/100)) / (1 + ($input['inflation_rate']/100))) - 1),2);
+    }
+
     // expected rate of return
     // accepts array of arrays ((probability, ROI), (probability, ROI)...)
     static function ERR($vals) {
